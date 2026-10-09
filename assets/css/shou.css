@@ -5,8 +5,8 @@ body { line-height: 1.8; }
 
 
 @media (min-width: 721px) {
-  html { background: #E6E3DC; }
-  body { max-width: 440px; margin-inline: auto; box-shadow: 0 0 0 1px var(--line), 0 40px 80px -40px rgb(0 0 0 / .4); }
+  html { background: #070706; }
+  body { max-width: 440px; margin-inline: auto; box-shadow: 0 0 0 1px var(--line); }
   .nav { left: 50%; right: auto; width: min(100%, 440px); transform: translateX(-50%); }
   .gallery { padding-inline: var(--edge); }
   .gallery + .band__meta { margin-inline: var(--edge); }
