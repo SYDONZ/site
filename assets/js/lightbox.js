@@ -65,6 +65,13 @@
     if (e.key === "ArrowLeft") show(index - 1);
     if (e.key === "ArrowRight") show(index + 1);
   });
+  let x0 = null;
+  box.addEventListener("pointerdown", (e) => { if (e.pointerType === "touch") x0 = e.clientX; });
+  box.addEventListener("pointerup", (e) => {
+    if (x0 === null) return;
+    const dx = e.clientX - x0; x0 = null;
+    if (Math.abs(dx) > 40 && triggers.length > 1) show(index + (dx < 0 ? 1 : -1));
+  });
   box.addEventListener("click", (e) => {
     if (e.target === box || e.target === stage) close();
   });

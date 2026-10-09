@@ -126,13 +126,26 @@
   }
 
   
-  $$("[data-marquee]").forEach((m) => {
-    const t = $(".marquee__track", m);
-    const one = t.innerHTML;
-    const w = t.scrollWidth + parseFloat(getComputedStyle(t).gap || 0);
-    while (t.scrollWidth < innerWidth * 2 + w) t.innerHTML += one;
-    t.style.setProperty("--w", `${w}px`);
-    m.style.setProperty("--dur", `${Math.max(24, w / 60)}s`);
+  $$("[data-band]").forEach((band) => {
+    const meta = document.createElement("div"); meta.className = "band__meta"; meta.hidden = true;
+    meta.innerHTML = `<p class="band__count"><b>01</b> / ${String(band.children.length).padStart(2, "0")}</p><i class="band__bar"><b></b></i>`;
+    band.after(meta);
+    const num = $("b", meta), items = [...band.children];
+    const update = () => {
+      const max = band.scrollWidth - band.clientWidth;
+      meta.hidden = max < 8 || getComputedStyle(band).overflowX === "visible";
+      if (meta.hidden) return;
+      meta.style.setProperty("--p", clamp(Math.abs(band.scrollLeft) / max).toFixed(3));
+      const r = band.getBoundingClientRect(), mid = r.left + Math.min(r.width, innerWidth - r.left) / 2;
+      let best = 0, bd = Infinity;
+      items.forEach((el, i) => { const b = el.getBoundingClientRect(); const d = Math.abs(b.left + b.width / 2 - mid); if (d < bd) { bd = d; best = i; } });
+      num.textContent = String(best + 1).padStart(2, "0");
+    };
+    band.addEventListener("scroll", update, { passive: true });
+    addEventListener("resize", update);
+    addEventListener("load", update);
+    document.fonts?.ready.then(update);
+    update();
   });
 
   
