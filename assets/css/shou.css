@@ -44,7 +44,9 @@ body { line-height: 1.8; }
 .mo-place { display: grid; gap: 16px; padding: var(--sp-2) 0; border-top: 1px solid var(--line); }
 .mo-place__name { display: flex; align-items: baseline; gap: 14px; }
 .mo-place__name h3 { font-weight: 900; font-size: var(--fs-big); line-height: 1; letter-spacing: -.02em; }
-.mo-place .plate { width: 100%; aspect-ratio: 1418 / 1120; }
+
+.mo-place .plate { width: 100%; aspect-ratio: 10 / 13; container: plate / size; }
+.mo-place .plate__t3 { --u: calc(100cqw / 1418 * var(--mz, 1)); transform: translate(calc(50cqw - var(--mx, 709) * var(--u)), calc(50cqh - var(--my, 560) * var(--u))); }
 .mo-quote { font-family: var(--serif); font-size: var(--fs-sub); line-height: 1.8; color: var(--ink-2); display: grid; gap: 6px; }
 .mo-quote cite { font-style: normal; font-family: var(--sans); font-size: var(--fs-note); color: var(--gray); letter-spacing: .06em; }
 
@@ -58,6 +60,9 @@ body { line-height: 1.8; }
 .mo-band--boards > li { width: min(60vw, 260px); }
 .mo-board img { width: 100%; aspect-ratio: 1200 / 2700; box-shadow: 0 0 0 1px var(--line); }
 .mo-room img { width: 100%; aspect-ratio: 16 / 10; object-fit: cover; }
+
+.mo .mo-poster { width: 100%; margin-inline: 0; }
+.mo-photo { width: calc(100% + 2 * var(--edge)); margin-inline: calc(-1 * var(--edge)); }
 .mo-poster img, .mo-photo img { width: 100%; object-fit: cover; }
 .mo-poster img { aspect-ratio: 3 / 4; }
 .mo-photo img { aspect-ratio: 1320 / 930; }
